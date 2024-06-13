@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #e6f7ff; /* Нежно-голубой фон */
+        }
+        main {
+            padding: 20px; /* Отступы для увеличения объема */
+        }
+        h2 {
+            text-align: center; /* Центрирование заголовка "Инструкция пользователя" */
+        }
+        ul {
+            padding-left: 0; /* Убираем отступы у списка */
+            list-style-position: inside; /* Перемещаем маркеры внутрь */
+        }
+        ul li {
+            margin-bottom: 15px; /* Увеличение отступа между элементами списка */
+        }
+        p {
+            margin-bottom: 20px; /* Увеличение отступа между параграфами */
+        }
+    </style>
+</head>
+<body>
+<header th:insert="blocks/header :: header" th:with="username=${username}" class="mb-auto"></header>
+<main class="container my-5">
+    <h1 class="text-center">Welcome! </h1>
+    <p class="text-center">Этот сайт создан специально для людей, которые любят не просто поесть, но и готовить!</p>
+    <p class="text-center">Здесь вы найдете несколько интересных рецептов с разных уголков планеты.</p>
+
+    <section>
+        <h2>Инструкция пользователя</h2>
+        <ul>
+            <li>Сейчас вы находитесь на главной странице этого сайта. Здесь представлена основная информация, инструкция для пользователей и контакты.</li>
+            <li>Вы можете спокойно передвигаться по разным страницам сайта, при условии, что выполнен вход в систему. Чтобы перейти на другую страницу, вам нужно выбрать нужный пункт выпадающего меню, которое находится в правой части шапки сайта.</li>
+            <li>При наведении на "Food" появляется "Select", при наведении на него вы увидите выпадающее меню с пунктами "Home food", "Italy", "France" и "Mexico". При переходе на каждую из этих пунктов вам все будут представлять страницы с таблицами соответствующих кухонь блюд. На всех страницах информация предназначена только для чтения.</li>
+            <li>Для всех блюд, представленных на сайте, вы можете найти информацию: название кухни, название блюд, калорийность, необходимые ингредиенты и рецепты.</li>
+            <li>Если вы хотите покинуть сайт, нажмите в правом верхнем углу на кнопку "Sign out".</li>
+        </ul>
+    </section>
+</main>
+
+<footer th:insert="blocks/footer :: footer" class="mt-auto"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

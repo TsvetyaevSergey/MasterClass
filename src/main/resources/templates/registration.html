@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #b3e5fc; /* Нежно голубой фон */
+        }
+        .form-container {
+            width: 400px; /* Увеличенная ширина формы */
+        }
+        h1 {
+            text-align: center; /* Центрирование заголовка */
+        }
+        .form-control {
+            background-color: #a0d4eb; /* Голубой цвет полей ввода */
+        }
+        .form-control::placeholder {
+            color: #ffffff; /* Цвет текста плейсхолдера */
+        }
+        .btn-submit {
+            background-color: black; /* Черный цвет кнопки */
+            color: white;
+        }
+        .invalid-feedback {
+            display: none;
+            color: red;
+        }
+        .form-control:invalid + .invalid-feedback {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="mx-auto position-absolute top-50 start-50 translate-middle form-container">
+    <form action="/new-user" method="post" novalidate>
+        <h1 class="h3 mb-3 fw-normal">Пожалуйста, войдите</h1>
+        <div class="form-floating mb-3">
+            <input type="text" name="username" class="form-control" id="floatingName" placeholder="Ваше Имя" required>
+            <label for="floatingName">Ваше Имя</label>
+            <div class="invalid-feedback">Пожалуйста, введите ваше имя.</div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+            <label for="floatingInput">Адрес электронной почты</label>
+            <div class="invalid-feedback">Пожалуйста, введите ваш email.</div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Пароль" required>
+            <label for="floatingPassword">Пароль</label>
+            <div class="invalid-feedback">Пожалуйста, введите ваш пароль.</div>
+        </div>
+        <div class="form-floating mb-3">
+            <select name="role" class="form-control" id="floatingRole" required>
+                <option value="" disabled selected>Выберите роль</option>
+                <option value="admin">Администратор</option>
+                <option value="user">Пользователь</option>
+            </select>
+            <label for="floatingRole">Роль</label>
+            <div class="invalid-feedback">Пожалуйста, выберите роль.</div>
+        </div>
+        <button class="btn btn-submit w-100 py-2" type="submit">Войти</button>
+    </form>
+</div>
+</body>
+</html>

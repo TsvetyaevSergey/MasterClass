@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #e0f7fa; /* Light blue background */
+            color: #000 !important; /* Ensure black text color */
+        }
+        .masterclass-img {
+            max-width: 100%; /* Ensure the image does not exceed its container */
+            height: auto;
+        }
+        .info-container {
+            display: flex;
+            align-items: flex-start; /* Align items to the top */
+            margin-bottom: 20px;
+        }
+        .text-info {
+            flex: 2; /* Take up twice the space of the image container */
+            padding-right: 20px;
+            color: #000 !important; /* Ensure black text color */
+        }
+        .image-container {
+            flex: 1; /* Take up one-third of the space */
+            max-width: 300px; /* Ensure images are smaller */
+        }
+        .card-title, .card-text {
+            color: #000 !important; /* Ensure black text color */
+        }
+    </style>
+</head>
+<body>
+<header th:insert="blocks/header :: header" th:with="username=${username}" class="mb-auto"></header>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title" th:text="${masterClass.name}">Название мастер-класса</h2>
+                    <p class="card-text">Пожелания: <span th:text="${masterClass.wishes}">Пожелания</span></p>
+                    <p class="card-text">Общая цена: <span th:text="${masterClass.totalPrice}">Общая цена</span> ₽</p>
+
+                    <h3 class="mt-4">Мастер</h3>
+                    <div class="info-container">
+                        <div class="text-info">
+                            <p class="card-text">Имя: <span th:text="${masterClass.master.name}">Имя мастера</span></p>
+                            <p class="card-text">Цена: <span th:text="${masterClass.master.price}">Цена мастера</span> ₽</p>
+                            <p class="card-text">Достижения: <span th:text="${masterClass.master.achievements}">Достижения мастера</span></p>
+                            <p class="card-text">Описание: <span th:text="${masterClass.master.description}">Описание мастера</span></p>
+                        </div>
+                        <div class="image-container">
+                            <img th:src="${masterClass.master.image_url}" class="masterclass-img" alt="Изображение мастера">
+                        </div>
+                    </div>
+
+                    <h3 class="mt-4">Блюда</h3>
+                    <div th:each="dish : ${masterClass.dishes}" class="info-container">
+                        <div class="text-info">
+                            <h5 class="card-title" th:text="${dish.name}">Название блюда</h5>
+                            <p class="card-text">Категория: <span th:text="${dish.category}">Категория блюда</span></p>
+                            <p class="card-text">Цена: <span th:text="${dish.price}">Цена блюда</span> ₽</p>
+                            <p class="card-text">Описание: <span th:text="${dish.description}">Описание блюда</span></p>
+                            <p class="card-text ingredient-list" th:text="${dish.ingredients}">Ингредиенты блюда</p>
+                        </div>
+                        <div class="image-container">
+                            <img th:src="${dish.image_url}" class="masterclass-img" alt="Изображение блюда">
+                        </div>
+                    </div>
+
+                    <h3 class="mt-4">Услуги</h3>
+                    <div th:each="service : ${masterClass.services}" class="info-container">
+                        <div class="text-info">
+                            <h5 class="card-title" th:text="${service.name}">Название услуги</h5>
+                            <p class="card-text">Цена: <span th:text="${service.price}">Цена услуги</span> ₽</p>
+                            <p class="card-text">Описание: <span th:text="${service.description}">Описание услуги</span></p>
+                        </div>
+                        <div class="image-container">
+                            <img th:src="${service.image_url}" class="masterclass-img" alt="Изображение услуги">
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <a th:href="'/masterClass/edit/' + ${masterClass.id}" class="btn btn-warning">Изменить</a>
+                        <a th:href="'/masterClass/delete/' + ${masterClass.id}" class="btn btn-danger">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:insert="blocks/footer :: footer" class="mt-auto"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #e0f7fa; /* Light blue background */
+        }
+        .dish-img {
+            max-width: 100%;
+            height: auto;
+        }
+        .ingredient-list {
+            white-space: pre-line; /* Preserve line breaks */
+        }
+    </style>
+    <script>
+        // Function to format ingredients with new lines before each capital letter
+        function formatIngredients(ingredients) {
+            return ingredients.replace(/([A-Z])/g, '\n$1').trim();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const ingredientsElement = document.getElementById('ingredients');
+            if (ingredientsElement) {
+                const formattedIngredients = formatIngredients(ingredientsElement.textContent);
+                ingredientsElement.textContent = formattedIngredients;
+            }
+        });
+    </script>
+</head>
+<body>
+<header th:insert="blocks/header :: header" th:with="username=${username}" class="mb-auto"></header>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <img th:src="${master.image_url}" class="card-img-top dish-img" alt="Изображение мастера">
+                <div class="card-body">
+                    <h2 class="card-title" th:text="${master.name}">Название мастера</h2>
+                    <p class="card-text">Цена: <span th:text="${master.price}">Цена</span> ₽</p>
+                    <p class="card-text">Описание: <span th:text="${master.description}">Описание</span></p>
+                    <p class="card-text">Достижения: <span th:text="${master.achievements}">Достижения</span></p>
+                    <div class="d-flex justify-content-between mt-3">
+                        <a th:href="'/master/edit/' + ${master.id}" class="btn btn-warning">Изменить</a>
+                        <a th:href="'/master/delete/' + ${master.id}" class="btn btn-danger">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:insert="blocks/footer :: footer" class="mt-auto"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

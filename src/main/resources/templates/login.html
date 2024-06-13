@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #b3e5fc; /* Нежно голубой фон */
+        }
+        .form-container {
+            width: 400px; /* Увеличенная ширина формы */
+        }
+        h1 {
+            text-align: center; /* Центрирование заголовка */
+        }
+        .form-control {
+            background-color: #a0d4eb; /* Голубой цвет полей ввода */
+        }
+        .form-control::placeholder {
+            color: #ffffff; /* Цвет текста плейсхолдера */
+        }
+        .btn-submit {
+            background-color: black; /* Черный цвет кнопки */
+            color: white;
+        }
+        .invalid-feedback {
+            display: none;
+            color: red;
+        }
+        .form-control:invalid + .invalid-feedback {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="mx-auto position-absolute top-50 start-50 translate-middle form-container">
+    <div th:if="${param.error}">
+        Неправильное имя пользователя или пароль</div>
+    <div th:if="${param.logout}">
+        Вы вышли из системы</div>
+    <form th:action="@{/login}" method="post" novalidate>
+        <h1 class="h3 mb-3 fw-normal">Вход</h1>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Имя" required>
+            <label for="floatingInput">Имя</label>
+            <div class="invalid-feedback">Пожалуйста, введите ваше имя.</div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Пароль" required>
+            <label for="floatingPassword">Пароль</label>
+            <div class="invalid-feedback">Пожалуйста, введите ваш пароль.</div>
+        </div>
+        <input class="btn btn-submit w-100 py-2" type="submit" value="Войти" />
+        <p class="fs-5">Нет аккаунта? <a href="/registration">Регистрация</a></p>
+    </form>
+</div>
+
+</body>
+</html>

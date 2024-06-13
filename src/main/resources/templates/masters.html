@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #e0f7fa; /* Light blue background */
+        }
+        .dish-card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Small shadow for the cards */
+            transition: transform 0.2s; /* Smooth transition for transform */
+        }
+        .dish-card:hover {
+            transform: scale(1.05); /* Slightly increase size on hover */
+            cursor: pointer;
+        }
+        .dish-card img {
+            max-width: 100%;
+            height: auto;
+        }
+        .btn-custom {
+            font-size: 1.25rem; /* Slightly larger font size */
+            border-radius: 30px; /* More rounded corners */
+            background-color: #007bff; /* Softer blue color */
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+         a.custom-link {
+            color: inherit;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<header th:insert="blocks/header :: header" th:with="username=${username}" class="mb-auto"></header>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-center mb-4" sec:authorize="hasRole('ADMIN')">
+        <a href="/master-add" class="btn btn-custom">Добавить мастера</a>
+    </div>
+    <div class="row">
+        <div class="col-md-3" th:each="master : ${masters}">
+            <div class="card dish-card">
+                <img th:src="${master.image_url}" class="card-img-top" alt="Master image">
+                <div class="card-body">
+                    <a class="card-title custom-link" th:text="${master.name}" th:href="'/master/' + ${master.id}"></a>
+                    <p class="card-text">Цена: <span th:text="${master.price}">Цена</span> ₽</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:insert="blocks/footer :: footer" class="mt-auto"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
